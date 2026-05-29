@@ -32,6 +32,8 @@ class HomeController extends Controller
             ->orderBy('name')
             ->get();
 
+            
+
         // =========================
         // 4) ลำดับภาค (ใช้ code)
         // =========================
@@ -52,14 +54,26 @@ class HomeController extends Controller
             return $branch->region_code ?? 'other';
         });
 
-        // =========================
-        // 6) สร้าง groups ให้ครบทุกภาค
-        // =========================
+       // =========================
+       // 6) สร้าง groups ให้ครบทุกภาค
+       // =========================
         $groups = collect();
-        foreach ($regionOrder as $code) {
-            $groups[$code] = $grouped->get($code, collect());
+            foreach ($regionOrder as $code) {
+        $items = $grouped->get($code, collect());
+
+        // ถ้ามีค้นหา → ไม่เอาภาคที่ว่าง
+             if ($q && $items->isEmpty()) {
+            continue;
         }
 
+        $groups[$code] = $items;
+        }
+        
+        $pinnedIds = session()->get('pinned_branches', []);
+        $pinnedBranches = CinemaBranch::withCount('theatres')
+            ->whereIn('id', $pinnedIds)
+            ->orderBy('name')
+            ->get();
         // =========================
         // 7) ส่งข้อมูลไปยัง View
         // =========================
@@ -70,4 +84,23 @@ class HomeController extends Controller
             'q'
         ));
     }
+    
+        public function togglePin(Request $request, CinemaBranch $branch)
+    {
+        $pins = session()->get('pinned_branches', []);
+
+        if (in_array($branch->id, $pins)) {
+        // ถ้าปักอยู่แล้ว → เอาออก
+            $pins = array_values(array_diff($pins, [$branch->id]));
+    }   
+        else {
+        // ถ้ายังไม่ปัก → เพิ่มเข้าไป
+        $pins[] = $branch->id;
+    }
+
+        session()->put('pinned_branches', $pins);
+
+        return back();
+    }
+    
 }

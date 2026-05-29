@@ -29,6 +29,10 @@ class TheatreController extends Controller
             $query->where('seat_count', '>=', $request->seat_min);
         }
 
+        $theatres = Theatre::where('branch_id', $branchId)
+        ->orderBy('theatre_number')
+        ->get();
+
         $theatres = $query
             ->paginate(20)
             ->withQueryString();

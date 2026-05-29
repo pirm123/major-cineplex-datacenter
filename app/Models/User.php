@@ -40,5 +40,13 @@ class User extends Authenticatable
     {
         return $this->role === 'admin';
     }
+
+    public function favoriteBranches()
+    {
+        return $this->belongsToMany(
+        CinemaBranch::class,
+        'favorite_branches'
+        )->withTimestamps();
+    }
 }
 

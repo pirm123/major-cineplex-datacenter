@@ -18,6 +18,8 @@ class CinemaBranch extends Model
     'total_theatres',
     'region',
     'zone', // ถ้ายังไม่ใช้ ปล่อยไว้ได้
+    'region_code',
+     'tms_app_ip',  
 ];
 
 
@@ -25,5 +27,13 @@ class CinemaBranch extends Model
     public function theatres()
     {
         return $this->hasMany(Theatre::class, 'branch_id');
+    }
+
+    public function favoritedBy()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'favorite_branches'
+        )->withTimestamps();
     }
 }

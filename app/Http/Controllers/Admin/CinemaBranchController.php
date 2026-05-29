@@ -55,6 +55,8 @@ class CinemaBranchController extends Controller
         'tms_ip'         => 'nullable|string|max:21', 
         'total_theatres' => 'required|integer|min:0',
         'region'         => 'required|string|max:50',
+        'tms_app_ip'     => 'nullable|string|max:50',
+        
     ]);
 
         CinemaBranch::create($data);
@@ -80,6 +82,7 @@ class CinemaBranchController extends Controller
         'tms_ip'         => 'nullable|string|max:21', 
         'total_theatres' => 'nullable|integer|min:0',
         'region'         => 'nullable|string|max:50',
+        'tms_app_ip'     => 'nullable|string|max:50',
         ]);
 
         $branch->update($data);
