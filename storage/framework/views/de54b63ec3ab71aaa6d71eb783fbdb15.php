@@ -1,8 +1,8 @@
-@extends('layouts.app')
 
-@section('title', 'Admin Dashboard – Major Cinema Data Center')
 
-@section('content')
+<?php $__env->startSection('title', 'Admin Dashboard – Major Cinema Data Center'); ?>
+
+<?php $__env->startSection('content'); ?>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700;800&family=Kanit:wght@300;400;600;700&display=swap');
 
@@ -528,10 +528,11 @@
 
 <div class="container py-4">
 
-    {{-- Header --}}
+    
     <div class="admin-header">
         <div class="welcome-badge">
-            Welcome, {{ auth()->user()->name }}
+            Welcome, <?php echo e(auth()->user()->name); ?>
+
         </div>
         <div class="admin-title">Admin Dashboard</div>
         <div class="admin-subtitle">
@@ -540,7 +541,7 @@
         </div>
     </div>
 
-    {{-- Stats Grid --}}
+    
     <div class="stats-grid">
         <div class="stat-card">
             <div class="stat-icon">
@@ -567,16 +568,16 @@
                     <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM3.751 20.105a8.25 8.25 0 0116.498 0 .75.75 0 01-.437.695A18.683 18.683 0 0112 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 01-.437-.695z" clip-rule="evenodd" />
                 </svg>
             </div>
-            <div class="stat-number">{{ auth()->user()->name }}</div>
+            <div class="stat-number"><?php echo e(auth()->user()->name); ?></div>
             <div class="stat-label">Logged in as Admin</div>
         </div>
     </div>
 
-    {{-- Management Section --}}
+    
     <h3 class="section-title">Management Tools</h3>
     
     <div class="admin-cards">
-        {{-- Manage Branches --}}
+        
         <div class="admin-card">
             <div class="card-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -589,13 +590,13 @@
                 Add, edit, and delete all cinema branch information across the country. 
                 Control branch details, locations, and regional organization.
             </p>
-            <a href="{{ route('admin.branches.index') }}" class="admin-btn">
+            <a href="<?php echo e(route('admin.branches.index')); ?>" class="admin-btn">
                 <span>Go to Branches</span>
                 <span class="btn-arrow">→</span>
             </a>
         </div>
 
-        {{-- Manage Theatres --}}
+        
         <div class="admin-card">
             <div class="card-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -607,22 +608,23 @@
                 Manage all theatre information including projectors, servers, and IP addresses. 
                 Update technical specifications and equipment details.
             </p>
-            <a href="{{ route('admin.theatres.index') }}" class="admin-btn">
+            <a href="<?php echo e(route('admin.theatres.index')); ?>" class="admin-btn">
                 <span>Go to Theatres</span>
                 <span class="btn-arrow">→</span>
             </a>
         </div>
     </div>
 
-    {{-- Quick Actions --}}
+    
     <div class="quick-actions">
         <h5>Quick Actions</h5>
         <div class="action-links">
-            <a href="{{ route('admin.branches.create') }}" class="action-link"><span>Add New Branch</span></a>
-            <a href="{{ route('admin.theatres.create') }}" class="action-link"><span>Add New Theatre</span></a>
-            <a href="{{ route('home') }}" class="action-link"><span>View Public Site</span></a>
+            <a href="<?php echo e(route('admin.branches.create')); ?>" class="action-link"><span>Add New Branch</span></a>
+            <a href="<?php echo e(route('admin.theatres.create')); ?>" class="action-link"><span>Add New Theatre</span></a>
+            <a href="<?php echo e(route('home')); ?>" class="action-link"><span>View Public Site</span></a>
         </div>
     </div>
 
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /var/www/html/resources/views/admin/dashboard.blade.php ENDPATH**/ ?>

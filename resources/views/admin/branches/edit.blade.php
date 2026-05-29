@@ -292,6 +292,21 @@
                            placeholder="e.g. 10.131.10.240:9000">
                 </div>
 
+                {{-- ✅ New: TMS APP --}}
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">
+                        TMS APP
+                        <span class="badge" style="background:#34d399; color:#022c22; font-weight:600;">
+                            IP
+                        </span>
+                    </label>
+                    <input type="text"
+                            name="tms_app_ip"
+                            class="form-control"
+                            value="{{ old('tms_app_ip', $branch->tms_app_ip ?? '') }}"
+                            placeholder="e.g. 10.131.10.240">
+                </div>
+
                 {{-- Total Theatres (existing) --}}
                 <div class="col-md-6 mb-3">
                     <label class="form-label"> Total Theatres</label>

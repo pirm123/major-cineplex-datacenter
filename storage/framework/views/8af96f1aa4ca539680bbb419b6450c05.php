@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', config('app.name'))</title>
+    <title><?php echo $__env->yieldContent('title', config('app.name')); ?></title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -172,14 +172,14 @@
         }
     </style>
 
-    @stack('styles')
+    <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-custom shadow-sm">
     <div class="container">
 
-        <a class="navbar-brand" href="{{ route('home') }}">
+        <a class="navbar-brand" href="<?php echo e(route('home')); ?>">
             <svg class="navbar-logo-icon" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="10" y="20" width="18" height="80" fill="url(#navP1)" rx="2"/>
                 <rect x="10" y="20" width="18" height="12" fill="#D94B2A" rx="2"/>
@@ -207,19 +207,19 @@
             <ul class="navbar-nav ms-auto align-items-center gap-1">
 
                 <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">
+                    <a class="nav-link <?php echo e(request()->routeIs('home') ? 'active' : ''); ?>" href="<?php echo e(route('home')); ?>">
                         <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
                         Home
                     </a>
                 </li>
 
-                @auth
-                    @if(auth()->user()->role === 'admin')
+                <?php if(auth()->guard()->check()): ?>
+                    <?php if(auth()->user()->role === 'admin'): ?>
 
                         <li class="d-flex align-items-center"><div class="nav-sep"></div></li>
 
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
+                            <a class="nav-link <?php echo e(request()->routeIs('admin.dashboard') ? 'active' : ''); ?>" href="<?php echo e(route('admin.dashboard')); ?>">
                                 <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
                                 Dashboard
                                 <span class="admin-badge"><div class="admin-dot"></div>Admin</span>
@@ -227,14 +227,14 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.branches.*') ? 'active' : '' }}" href="{{ route('admin.branches.index') }}">
+                            <a class="nav-link <?php echo e(request()->routeIs('admin.branches.*') ? 'active' : ''); ?>" href="<?php echo e(route('admin.branches.index')); ?>">
                                 <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
                                 Manage Branches
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.theatres.*') ? 'active' : '' }}" href="{{ route('admin.theatres.index') }}">
+                            <a class="nav-link <?php echo e(request()->routeIs('admin.theatres.*') ? 'active' : ''); ?>" href="<?php echo e(route('admin.theatres.index')); ?>">
                                 <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/><line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/></svg>
                                 Manage Theatres
                             </a>
@@ -243,26 +243,26 @@
                         <li class="d-flex align-items-center"><div class="nav-sep"></div></li>
 
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.excel') ? 'active' : '' }}" href="{{ route('admin.excel') }}">
+                            <a class="nav-link <?php echo e(request()->routeIs('admin.excel') ? 'active' : ''); ?>" href="<?php echo e(route('admin.excel')); ?>">
                                 <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                                 Import / Export Excel
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
+                            <a class="nav-link <?php echo e(request()->routeIs('admin.users.*') ? 'active' : ''); ?>" href="<?php echo e(route('admin.users.index')); ?>">
                                 <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                                 Manage Users
                             </a>
                         </li>
 
-                    @endif
+                    <?php endif; ?>
 
                     <li class="d-flex align-items-center"><div class="nav-sep"></div></li>
 
                     <li class="nav-item">
-                        <form method="POST" action="{{ route('logout') }}" style="margin:0;">
-                            @csrf
+                        <form method="POST" action="<?php echo e(route('logout')); ?>" style="margin:0;">
+                            <?php echo csrf_field(); ?>
                             <button type="submit" class="nav-link btn-logout">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
                                 Logout
@@ -270,14 +270,14 @@
                         </form>
                     </li>
 
-                @else
+                <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link btn-login" href="{{ route('login') }}">Login</a>
+                        <a class="nav-link btn-login" href="<?php echo e(route('login')); ?>">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        <a class="nav-link" href="<?php echo e(route('register')); ?>">Register</a>
                     </li>
-                @endauth
+                <?php endif; ?>
 
             </ul>
         </div>
@@ -285,15 +285,16 @@
 </nav>
 
 <main class="py-4 container">
-    @yield('content')
+    <?php echo $__env->yieldContent('content'); ?>
 </main>
 
 <footer>
-    {{ config('app.name') }} &copy; {{ date('Y') }}
+    <?php echo e(config('app.name')); ?> &copy; <?php echo e(date('Y')); ?>
+
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-@stack('scripts')
+<?php echo $__env->yieldPushContent('scripts'); ?>
 
 </body>
-</html>
+</html><?php /**PATH /var/www/html/resources/views/layouts/app.blade.php ENDPATH**/ ?>

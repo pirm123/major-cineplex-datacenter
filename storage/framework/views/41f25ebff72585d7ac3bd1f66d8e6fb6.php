@@ -1,6 +1,4 @@
-@extends('layouts.app')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700;800&family=Kanit:wght@300;400;600;700&display=swap');
 
@@ -847,58 +845,63 @@
 
 <div class="container py-4">
 
-    {{-- ================= HERO ================= --}}
+    
     <div class="hero-section">
         <h1 class="main-title">Major Cineplex</h1>
 
         <p class="subtitle">
-            {{ __('home.hero_subtitle') }}
+            <?php echo e(__('home.hero_subtitle')); ?>
+
         </p>
 
         <div class="stats-overview">
             <div class="stat-box">
                 <div class="stat-number">
-                    {{ $branchCount ?? $branches->count() }}
+                    <?php echo e($branchCount ?? $branches->count()); ?>
+
                 </div>
                 <div class="stat-label">
-                    {{ __('home.total_branches') }}
+                    <?php echo e(__('home.total_branches')); ?>
+
                 </div>
             </div>
 
             <div class="stat-box">
                 <div class="stat-number">
-                    {{ $theatreCount ?? $branches->sum('theatres_count') }}
+                    <?php echo e($theatreCount ?? $branches->sum('theatres_count')); ?>
+
                 </div>
                 <div class="stat-label">
-                    {{ __('home.total_theatres') }}
+                    <?php echo e(__('home.total_theatres')); ?>
+
                 </div>
             </div>
         </div>
     </div>
     
-    {{-- ================= SEARCH BAR ================= --}}
-    <form method="GET" action="{{ route('home') }}" class="home-search">
+    
+    <form method="GET" action="<?php echo e(route('home')); ?>" class="home-search">
         <input 
             type="text" 
             name="q" 
-            value="{{ request('q') }}"
+            value="<?php echo e(request('q')); ?>"
             placeholder=" Search branch Ratchayothin / Bangkapi"
             class="home-search-input"
         >
         <button type="submit" class="home-search-btn">
             Search
         </button>
-        @if(request('q'))
-            <a href="{{ route('home') }}" class="home-search-clear-btn">
+        <?php if(request('q')): ?>
+            <a href="<?php echo e(route('home')); ?>" class="home-search-clear-btn">
                 Clear
             </a>
-        @endif
+        <?php endif; ?>
     </form>
 
-    {{-- ================= REGIONS ================= --}}
-    @foreach($groups as $region => $items)
+    
+    <?php $__currentLoopData = $groups; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $region => $items): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
-        @php
+        <?php
             $regionMap = [
                 'กรุงเทพมหานคร' => 'region_bkk',
                 'กรุงเทพฯ' => 'region_bkk',
@@ -912,12 +915,12 @@
 
             $regionKeyName = $regionMap[$region] ?? null;
             $regionKey = 'region-' . $loop->index;
-        @endphp
+        ?>
 
         <div class="region-section">
 
-            {{-- Region Header --}}
-            <div class="region-header" onclick="toggleRegion('{{ $regionKey }}')">
+            
+            <div class="region-header" onclick="toggleRegion('<?php echo e($regionKey); ?>')">
 
                 <span class="region-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -926,26 +929,29 @@
                 </span>
 
                 <h2 class="region-title">
-                    {{ __('home.regions.' . $region) }}
+                    <?php echo e(__('home.regions.' . $region)); ?>
+
                 </h2>
 
                 <span class="region-count">
-                    {{ $items->count() }} {{ __('home.branches_count') }}
+                    <?php echo e($items->count()); ?> <?php echo e(__('home.branches_count')); ?>
+
                 </span>
 
-                <span class="region-arrow" id="arrow-{{ $regionKey }}">▸</span>
+                <span class="region-arrow" id="arrow-<?php echo e($regionKey); ?>">▸</span>
             </div>
 
-            {{-- Region Content --}}
-            <div class="region-content" id="region-{{ $regionKey }}">
+            
+            <div class="region-content" id="region-<?php echo e($regionKey); ?>">
                 <div class="row g-4">
 
-                    @forelse($items as $branch)
+                    <?php $__empty_1 = true; $__currentLoopData = $items; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $branch): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                         <div class="col-lg-4 col-md-6">
                             <div class="branch-card">
 
                                 <div class="theatre-badge">
-                                    {{ $branch->theatres_count }} {{ __('home.theatres_suffix') }}
+                                    <?php echo e($branch->theatres_count); ?> <?php echo e(__('home.theatres_suffix')); ?>
+
                                 </div>
 
                                 <div class="card-body">
@@ -960,47 +966,53 @@
                                     </div>
 
                                     <h4 class="card-title">
-                                        {{ $branch->name }}
+                                        <?php echo e($branch->name); ?>
+
                                     </h4>
 
                                     <div class="theatre-info">
                                         <span class="theatre-info-text">
-                                            {{ __('home.total_theatres') }}
+                                            <?php echo e(__('home.total_theatres')); ?>
+
                                         </span>
                                         <span class="theatre-info-number">
-                                            {{ $branch->theatres_count }}
+                                            <?php echo e($branch->theatres_count); ?>
+
                                         </span>
                                         <span class="theatre-info-text">
-                                            {{ __('home.theatres_suffix') }}
+                                            <?php echo e(__('home.theatres_suffix')); ?>
+
                                         </span>
                                     </div>
 
                                     <p class="address-text">
-                                        📍 {{ $branch->address ?? __('home.no_address') }}
+                                        📍 <?php echo e($branch->address ?? __('home.no_address')); ?>
+
                                     </p>
 
-                                    <a href="{{ route('branches.theatres.index', $branch->id) }}"
+                                    <a href="<?php echo e(route('branches.theatres.index', $branch->id)); ?>"
                                        class="view-btn">
-                                        {{ __('home.view_theatres') }} →
+                                        <?php echo e(__('home.view_theatres')); ?> →
                                     </a>
 
                                 </div>
                             </div>
                         </div>
-                    @empty
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
                         <div class="col-12 text-center text-muted">
-                            {{ __('home.no_data') }}
+                            <?php echo e(__('home.no_data')); ?>
+
                         </div>
-                    @endforelse
+                    <?php endif; ?>
 
                 </div>
             </div>
         </div>
 
-    @endforeach
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </div>
 
-{{-- JS --}}
+
 <script>
 function toggleRegion(key) {
 
@@ -1026,4 +1038,5 @@ function toggleRegion(key) {
 
 </script>
 
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /var/www/html/resources/views/home.blade.php ENDPATH**/ ?>

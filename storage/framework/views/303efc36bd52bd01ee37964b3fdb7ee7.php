@@ -1,6 +1,6 @@
-@extends('layouts.app')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap');
     * { font-family: 'Prompt', sans-serif; box-sizing: border-box; }
@@ -170,16 +170,16 @@
 
 <div class="container py-4">
 
-    <a href="{{ route('branches.theatres.index', $branch->id) }}" class="back-btn mb-4">
+    <a href="<?php echo e(route('branches.theatres.index', $branch->id)); ?>" class="back-btn mb-4">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M10 12L6 8l4-4"/></svg>
         Back to Halls
     </a>
 
-    {{-- ── Header ── --}}
+    
     <div class="page-header mb-4">
         <div class="header-inner">
 
-            {{-- Left --}}
+            
             <div class="header-left">
                 <div class="d-flex align-items-flex-start gap-3 flex-wrap">
                     <svg width="44" height="52" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;filter:drop-shadow(0 3px 8px rgba(232,90,60,.5));margin-top:4px;">
@@ -199,25 +199,26 @@
                         </defs>
                     </svg>
                     <div>
-                        <div class="branch-name">{{ $branch->name }}</div>
+                        <div class="branch-name"><?php echo e($branch->name); ?></div>
                         <div class="theatre-chip">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1a1a2e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
                                 <line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
                                 <line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/>
                             </svg>
-                            Hall {{ $theatre->theatre_number }}
+                            Hall <?php echo e($theatre->theatre_number); ?>
+
                         </div>
                     </div>
                 </div>
             </div>
 
-            {{-- Right: Server badge + Projector badge --}}
-            @if($theatre->client_ip || $theatre->projector_ip)
+            
+            <?php if($theatre->client_ip || $theatre->projector_ip): ?>
             <div class="header-right">
 
-                {{-- Server badge --}}
-                @if($theatre->client_ip)
+                
+                <?php if($theatre->client_ip): ?>
                 <div class="proj-badge-wrap srv-badge-wrap" id="srv-badge-wrap">
                     <div class="proj-header-badge srv-header-badge" onclick="toggleSrvMenu(event)">
                         <div class="badge-left">
@@ -225,7 +226,7 @@
                                 <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
                                 OPEN SERVER
                             </div>
-                            <div class="badge-ip-val" id="srv-ip-val">{{ $theatre->client_ip }}</div>
+                            <div class="badge-ip-val" id="srv-ip-val"><?php echo e($theatre->client_ip); ?></div>
                         </div>
                         <svg class="badge-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
                             <polyline points="6 9 12 15 18 9"/>
@@ -235,7 +236,7 @@
                         <div class="dd-divider"></div>
                         <div class="dd-label">Server Access</div>
 
-                        <a class="dd-btn c-cyan" href="http://{{ $theatre->client_ip }}" target="_blank">
+                        <a class="dd-btn c-cyan" href="http://<?php echo e($theatre->client_ip); ?>" target="_blank">
                             <div class="dd-dot c-cyan"></div>
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
@@ -244,7 +245,7 @@
                             Open Web Browser
                         </a>
 
-                        <button class="dd-btn c-green" onclick="runGdcServer('{{ $theatre->client_ip }}')">
+                        <button class="dd-btn c-green" onclick="runGdcServer('<?php echo e($theatre->client_ip); ?>')">
                             <div class="dd-dot c-green"></div>
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="3" width="20" height="14" rx="2"/>
@@ -263,10 +264,10 @@
                         </button>
                     </div>
                 </div>
-                @endif
+                <?php endif; ?>
 
-                {{-- Projector badge --}}
-                @if($theatre->projector_ip)
+                
+                <?php if($theatre->projector_ip): ?>
                 <div class="proj-badge-wrap" id="proj-badge-wrap">
 
                     <div class="proj-header-badge" onclick="toggleProjMenu(event)">
@@ -275,7 +276,7 @@
                                 <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="12" cy="12" r="3"/></svg>
                                 REMOTE PROJECTOR
                             </div>
-                            <div class="badge-ip-val" id="proj-ip-val">{{ $theatre->projector_ip }}</div>
+                            <div class="badge-ip-val" id="proj-ip-val"><?php echo e($theatre->projector_ip); ?></div>
                         </div>
                         <svg class="badge-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
                             <polyline points="6 9 12 15 18 9"/>
@@ -289,7 +290,7 @@
                         <div class="dd-divider"></div>
                         <div class="dd-label">Remote Access</div>
 
-                        <button class="dd-btn c-yellow" onclick="runProjectorVNC('{{ $theatre->projector_ip }}')">
+                        <button class="dd-btn c-yellow" onclick="runProjectorVNC('<?php echo e($theatre->projector_ip); ?>')">
                             <div class="dd-dot c-yellow"></div>
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <rect x="2" y="3" width="20" height="14" rx="2"/>
@@ -309,10 +310,10 @@
 
                     </div>
                 </div>
-                @endif
+                <?php endif; ?>
 
             </div>
-            @endif
+            <?php endif; ?>
 
         </div>
 
@@ -325,10 +326,10 @@
                 </div>
                 <div>
                     <div class="stat-pill-label">Total Seats</div>
-                    <div class="stat-pill-value" id="seat-count-val">{{ number_format($theatre->seat_count ?? 0) }}</div>
+                    <div class="stat-pill-value" id="seat-count-val"><?php echo e(number_format($theatre->seat_count ?? 0)); ?></div>
                 </div>
             </div>
-            @if($theatre->Type_name)
+            <?php if($theatre->Type_name): ?>
             <div class="stat-pill">
                 <div class="stat-pill-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#ffd93d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -337,11 +338,11 @@
                 </div>
                 <div>
                     <div class="stat-pill-label">Screen Type</div>
-                    <div class="stat-pill-value" style="font-size:.9rem;padding-top:2px;">{{ $theatre->Type_name }}</div>
+                    <div class="stat-pill-value" style="font-size:.9rem;padding-top:2px;"><?php echo e($theatre->Type_name); ?></div>
                 </div>
             </div>
-            @endif
-            @if($theatre->special_format)
+            <?php endif; ?>
+            <?php if($theatre->special_format): ?>
             <div class="stat-pill">
                 <div class="stat-pill-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="#ffd93d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -350,14 +351,14 @@
                 </div>
                 <div>
                     <div class="stat-pill-label">Format</div>
-                    <div class="stat-pill-value" style="font-size:.9rem;padding-top:2px;">{{ $theatre->special_format }}</div>
+                    <div class="stat-pill-value" style="font-size:.9rem;padding-top:2px;"><?php echo e($theatre->special_format); ?></div>
                 </div>
             </div>
-            @endif
+            <?php endif; ?>
         </div>
     </div>
 
-    {{-- ── Grid ── --}}
+    
     <div class="row g-3">
 
         <div class="col-lg-6">
@@ -368,23 +369,23 @@
                     </div>
                     <span class="card-head-title">General Information</span>
                 </div>
-                <div class="info-row"><div class="row-label">Hall No.</div><div class="row-value accent">{{ $theatre->theatre_number ?? '-' }}</div></div>
-                @if($theatre->Type_name)
-                <div class="info-row"><div class="row-label">Screen Type</div><div class="row-value">{{ $theatre->Type_name }}</div></div>
-                @endif
-                @if($theatre->special_format)
-                <div class="info-row"><div class="row-label">Special Format</div><div class="row-value"><span class="format-tag">{{ $theatre->special_format }}</span></div></div>
-                @endif
-                <div class="info-row"><div class="row-label">Seat Capacity</div><div class="row-value accent">{{ number_format($theatre->seat_count ?? 0) }} <span style="color:#6a748f;font-weight:400;">seats</span></div></div>
-                @if($theatre->three_d_type)
-                <div class="info-row"><div class="row-label">3D Type</div><div class="row-value">{{ $theatre->three_d_type }}</div></div>
-                @endif
-                @if($theatre->initial_installation)
-                <div class="info-row"><div class="row-label">Installed</div><div class="row-value">{{ $theatre->initial_installation->format('d/m/Y') }}</div></div>
-                @endif
-                @if($theatre->version)
-                <div class="info-row"><div class="row-label">Version</div><div class="row-value">{{ $theatre->version }}</div></div>
-                @endif
+                <div class="info-row"><div class="row-label">Hall No.</div><div class="row-value accent"><?php echo e($theatre->theatre_number ?? '-'); ?></div></div>
+                <?php if($theatre->Type_name): ?>
+                <div class="info-row"><div class="row-label">Screen Type</div><div class="row-value"><?php echo e($theatre->Type_name); ?></div></div>
+                <?php endif; ?>
+                <?php if($theatre->special_format): ?>
+                <div class="info-row"><div class="row-label">Special Format</div><div class="row-value"><span class="format-tag"><?php echo e($theatre->special_format); ?></span></div></div>
+                <?php endif; ?>
+                <div class="info-row"><div class="row-label">Seat Capacity</div><div class="row-value accent"><?php echo e(number_format($theatre->seat_count ?? 0)); ?> <span style="color:#6a748f;font-weight:400;">seats</span></div></div>
+                <?php if($theatre->three_d_type): ?>
+                <div class="info-row"><div class="row-label">3D Type</div><div class="row-value"><?php echo e($theatre->three_d_type); ?></div></div>
+                <?php endif; ?>
+                <?php if($theatre->initial_installation): ?>
+                <div class="info-row"><div class="row-label">Installed</div><div class="row-value"><?php echo e($theatre->initial_installation->format('d/m/Y')); ?></div></div>
+                <?php endif; ?>
+                <?php if($theatre->version): ?>
+                <div class="info-row"><div class="row-label">Version</div><div class="row-value"><?php echo e($theatre->version); ?></div></div>
+                <?php endif; ?>
             </div>
 
             <div class="info-card">
@@ -394,14 +395,14 @@
                     </div>
                     <span class="card-head-title">Sound System</span>
                 </div>
-                <div class="info-row"><div class="row-label">Brand</div><div class="row-value accent">{{ $theatre->sound_make ?? '-' }}</div></div>
-                <div class="info-row"><div class="row-label">Model</div><div class="row-value">{{ $theatre->sound_model ?? '-' }}</div></div>
-                @if($theatre->sound_ip)
-                <div class="info-row"><div class="row-label">Sound IP</div><div class="row-value"><span class="mono">{{ $theatre->sound_ip }}</span></div></div>
-                @endif
-                @if($theatre->sound_port)
-                <div class="info-row"><div class="row-label">Port</div><div class="row-value"><span class="mono">{{ $theatre->sound_port }}</span></div></div>
-                @endif
+                <div class="info-row"><div class="row-label">Brand</div><div class="row-value accent"><?php echo e($theatre->sound_make ?? '-'); ?></div></div>
+                <div class="info-row"><div class="row-label">Model</div><div class="row-value"><?php echo e($theatre->sound_model ?? '-'); ?></div></div>
+                <?php if($theatre->sound_ip): ?>
+                <div class="info-row"><div class="row-label">Sound IP</div><div class="row-value"><span class="mono"><?php echo e($theatre->sound_ip); ?></span></div></div>
+                <?php endif; ?>
+                <?php if($theatre->sound_port): ?>
+                <div class="info-row"><div class="row-label">Port</div><div class="row-value"><span class="mono"><?php echo e($theatre->sound_port); ?></span></div></div>
+                <?php endif; ?>
             </div>
         </div>
 
@@ -413,14 +414,14 @@
                     </div>
                     <span class="card-head-title">Server</span>
                 </div>
-                <div class="info-row"><div class="row-label">Brand</div><div class="row-value accent">{{ $theatre->server_make ?? '-' }}</div></div>
-                <div class="info-row"><div class="row-label">Model</div><div class="row-value">{{ $theatre->server_model ?? '-' }}</div></div>
-                @if($theatre->server_serial)
-                <div class="info-row"><div class="row-label">Serial</div><div class="row-value"><span class="mono">{{ $theatre->server_serial }}</span></div></div>
-                @endif
-                @if($theatre->client_ip)
-                <div class="info-row"><div class="row-label">Server IP</div><div class="row-value"><span class="mono">{{ $theatre->client_ip }}</span></div></div>
-                @endif
+                <div class="info-row"><div class="row-label">Brand</div><div class="row-value accent"><?php echo e($theatre->server_make ?? '-'); ?></div></div>
+                <div class="info-row"><div class="row-label">Model</div><div class="row-value"><?php echo e($theatre->server_model ?? '-'); ?></div></div>
+                <?php if($theatre->server_serial): ?>
+                <div class="info-row"><div class="row-label">Serial</div><div class="row-value"><span class="mono"><?php echo e($theatre->server_serial); ?></span></div></div>
+                <?php endif; ?>
+                <?php if($theatre->client_ip): ?>
+                <div class="info-row"><div class="row-label">Server IP</div><div class="row-value"><span class="mono"><?php echo e($theatre->client_ip); ?></span></div></div>
+                <?php endif; ?>
             </div>
 
             <div class="info-card">
@@ -430,21 +431,21 @@
                     </div>
                     <span class="card-head-title">Projector</span>
                 </div>
-                <div class="info-row"><div class="row-label">Brand</div><div class="row-value accent">{{ $theatre->projector_make ?? '-' }}</div></div>
-                <div class="info-row"><div class="row-label">Model</div><div class="row-value">{{ $theatre->projector_model ?? '-' }}</div></div>
-                @if($theatre->projector_serial)
-                <div class="info-row"><div class="row-label">Serial</div><div class="row-value"><span class="mono">{{ $theatre->projector_serial }}</span></div></div>
-                @endif
-                {{-- แสดง IP แบบ plain ใน card --}}
-                @if($theatre->projector_ip)
+                <div class="info-row"><div class="row-label">Brand</div><div class="row-value accent"><?php echo e($theatre->projector_make ?? '-'); ?></div></div>
+                <div class="info-row"><div class="row-label">Model</div><div class="row-value"><?php echo e($theatre->projector_model ?? '-'); ?></div></div>
+                <?php if($theatre->projector_serial): ?>
+                <div class="info-row"><div class="row-label">Serial</div><div class="row-value"><span class="mono"><?php echo e($theatre->projector_serial); ?></span></div></div>
+                <?php endif; ?>
+                
+                <?php if($theatre->projector_ip): ?>
                 <div class="info-row">
                     <div class="row-label">Projector IP</div>
-                    <div class="row-value"><span class="mono">{{ $theatre->projector_ip }}</span></div>
+                    <div class="row-value"><span class="mono"><?php echo e($theatre->projector_ip); ?></span></div>
                 </div>
-                @endif
-                @if($theatre->lamp_type)
-                <div class="info-row"><div class="row-label">Lamp / Laser</div><div class="row-value">{{ $theatre->lamp_type }}</div></div>
-                @endif
+                <?php endif; ?>
+                <?php if($theatre->lamp_type): ?>
+                <div class="info-row"><div class="row-label">Lamp / Laser</div><div class="row-value"><?php echo e($theatre->lamp_type); ?></div></div>
+                <?php endif; ?>
             </div>
         </div>
     </div>
@@ -522,4 +523,5 @@ async function runProjectorVNC(ip) {
     } catch(e) { alert('❌ ยังไม่ได้เปิด tightvnc-agent.exe\nให้กด "ดาวน์โหลด" แล้วเปิดก่อน'); }
 }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /var/www/html/resources/views/theatres/show.blade.php ENDPATH**/ ?>

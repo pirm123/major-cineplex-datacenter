@@ -1,6 +1,6 @@
-@extends('layouts.app')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 <style>
     * { font-family: 'Prompt', sans-serif; }
     body {
@@ -374,25 +374,25 @@
 
 <div class="container py-4">
 
-    <a href="{{ route('home') }}" class="back-btn mb-4 d-inline-flex">
+    <a href="<?php echo e(route('home')); ?>" class="back-btn mb-4 d-inline-flex">
         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M10 12L6 8l4-4"/></svg>
         Back to Home
     </a>
 
-    {{-- Header --}}
+    
     <div class="header-wrapper mb-4">
         <div class="row align-items-start g-4">
             <div class="col-lg-7">
-                <div class="mc-title">{{ $branch->name }}</div>
+                <div class="mc-title"><?php echo e($branch->name); ?></div>
                 <div class="mc-subtitle">Theatres · Projection Systems · Servers &amp; Projectors</div>
                 <div class="stats-row">
                     <div class="stat-box">
                         <div class="stat-label">Total Theatres</div>
-                        <div class="stat-value">{{ count($theatres) }}</div>
+                        <div class="stat-value"><?php echo e(count($theatres)); ?></div>
                     </div>
                     <div class="stat-box">
                         <div class="stat-label">Total Seats</div>
-                        <div class="stat-value">{{ number_format($theatres->sum('seat_count')) }}</div>
+                        <div class="stat-value"><?php echo e(number_format($theatres->sum('seat_count'))); ?></div>
                     </div>
                 </div>
             </div>
@@ -401,7 +401,7 @@
                 <div class="right-col">
                     <div class="badge-group">
 
-                        {{-- CLIENT IP — accordion gold --}}
+                        
                         <div class="acc-badge-wrap gold" id="client-ip-wrap">
                             <div class="acc-badge-head" onclick="toggleAcc('client-ip-wrap')">
                                 <div class="acc-badge-left">
@@ -409,14 +409,14 @@
                                         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                                         CLIENT IP
                                     </div>
-                                    <div class="acc-badge-ip">{{ $branch->branch_ip }}</div>
+                                    <div class="acc-badge-ip"><?php echo e($branch->branch_ip); ?></div>
                                 </div>
                                 <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
                                     <polyline points="6 9 12 15 18 9"/>
                                 </svg>
                             </div>
                             <div class="acc-panel">
-                                <button class="dd-btn c-yellow" onclick="runRemoteUtilities('{{ $branch->branch_ip }}')">
+                                <button class="dd-btn c-yellow" onclick="runRemoteUtilities('<?php echo e($branch->branch_ip); ?>')">
                                     <div class="dd-dot c-yellow"></div>
                                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                         <rect x="2" y="3" width="20" height="14" rx="2"/>
@@ -435,12 +435,12 @@
                             </div>
                         </div>
 
-                        @if(!empty($branch->tms_ip))
-                        {{-- TMS row: Server (link) + APP (accordion) --}}
+                        <?php if(!empty($branch->tms_ip)): ?>
+                        
                         <div class="tms-row">
 
-                            {{-- TMS Server (cyan — เปิดเว็บตรง) --}}
-                            <a href="http://{{ $branch->tms_ip }}" target="_blank" class="mc-tms-badge">
+                            
+                            <a href="http://<?php echo e($branch->tms_ip); ?>" target="_blank" class="mc-tms-badge">
                                 <div class="acc-badge-label" style="color:rgba(255,255,255,.7);">
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;">
                                         <rect x="2" y="2" width="20" height="8" rx="2"/>
@@ -450,10 +450,10 @@
                                     </svg>
                                     TMS SERVER
                                 </div>
-                                <div class="acc-badge-ip">{{ $branch->tms_ip }}</div>
+                                <div class="acc-badge-ip"><?php echo e($branch->tms_ip); ?></div>
                             </a>
 
-                            {{-- TMS APP (violet — accordion) --}}
+                            
                             <div class="acc-badge-wrap violet" id="tms-app-wrap">
                                 <div class="acc-badge-head" onclick="toggleAcc('tms-app-wrap')">
                                     <div class="acc-badge-left">
@@ -464,14 +464,14 @@
                                             </svg>
                                             TMS APP
                                         </div>
-                                        <div class="acc-badge-ip">{{ $branch->tms_app_ip ?? 'N/A' }}</div>
+                                        <div class="acc-badge-ip"><?php echo e($branch->tms_app_ip ?? 'N/A'); ?></div>
                                     </div>
                                     <svg class="acc-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
                                         <polyline points="6 9 12 15 18 9"/>
                                     </svg>
                                 </div>
                                 <div class="acc-panel">
-                                    <button class="dd-btn c-yellow" onclick="runTightVNC('{{ $branch->tms_app_ip }}')">
+                                    <button class="dd-btn c-yellow" onclick="runTightVNC('<?php echo e($branch->tms_app_ip); ?>')">
                                         <div class="dd-dot c-yellow"></div>
                                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <rect x="2" y="3" width="20" height="14" rx="2"/>
@@ -491,7 +491,7 @@
                             </div>
 
                         </div>
-                        @endif
+                        <?php endif; ?>
 
                     </div>
                 </div>
@@ -499,15 +499,15 @@
         </div>
     </div>
 
-    {{-- Hall Buttons --}}
+    
     <div class="halls-section-title">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:0.4"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
         Theatres
     </div>
 
     <div class="halls-grid">
-        @foreach($theatres as $theatre)
-        @php
+        <?php $__currentLoopData = $theatres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $theatre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+        <?php
             $sf  = strtolower($theatre->special_format ?? '');
             $cls = 'hall-card';
             if      (str_contains($sf,'imax'))  $cls .= ' is-imax';
@@ -519,11 +519,11 @@
             elseif  (str_contains($sf,'4dx'))   $name = '4DX';
             elseif  (str_contains($sf,'kids'))  $name = 'Kids '.$theatre->theatre_number;
             else                                $name = 'Hall '.$theatre->theatre_number;
-        @endphp
-        <a href="{{ route('branches.theatres.show', [$branch->id, $theatre->id]) }}" class="{{ $cls }}">
-            <span class="hall-name">{{ $name }}</span>
+        ?>
+        <a href="<?php echo e(route('branches.theatres.show', [$branch->id, $theatre->id])); ?>" class="<?php echo e($cls); ?>">
+            <span class="hall-name"><?php echo e($name); ?></span>
         </a>
-        @endforeach
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
     </div>
 
 </div>
@@ -582,4 +582,5 @@ async function runTightVNC(ip) {
     }
 }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH /var/www/html/resources/views/theatres/index.blade.php ENDPATH**/ ?>

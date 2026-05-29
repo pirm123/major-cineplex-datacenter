@@ -1,59 +1,529 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎬 Major Cineplex Datacenter
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+ระบบจัดการ Datacenter และอุปกรณ์โรงภาพยนตร์
+รองรับการจัดการ:
 
-## About Laravel
+* Branches
+* Theatres
+* Projectors
+* Sound Systems
+* DCP Servers / IMS
+* Network IP Management
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+พัฒนาด้วย Laravel + MySQL + Docker
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+# 📦 Tech Stack
 
-## Learning Laravel
+| Technology     | Version |
+| -------------- | ------- |
+| Laravel        | 12      |
+| PHP            | 8.3     |
+| MySQL          | 8       |
+| Docker Compose | Latest  |
+| phpMyAdmin     | Latest  |
+| Node.js        | LTS     |
+| TailwindCSS    | Latest  |
+| Vite           | Latest  |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# 📁 Project Structure
 
-## Laravel Sponsors
+```text
+major-cineplex-datacenter/
+│
+├── app/
+├── bootstrap/
+├── config/
+├── database/
+├── docker/
+├── public/
+├── resources/
+├── routes/
+├── storage/
+├── vendor/
+├── .env
+├── artisan
+├── composer.json
+├── docker-compose.yml
+└── package.json
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+---
 
-### Premium Partners
+# 🚀 Features
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## Branch Management
 
-## Contributing
+* จัดการสาขาโรงภาพยนตร์
+* Location Management
+* Theatre Count
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## Theatre Management
 
-## Code of Conduct
+* Theatre Information
+* Screen Size
+* Throw Distance
+* Seat Count
+* Lamp Type
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Equipment Management
 
-## Security Vulnerabilities
+* DCP Server / IMS
+* Projector
+* Sound Processor
+* Serial Number Tracking
+* IP Address Tracking
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Monitoring
 
-## License
+* Device IP Monitoring
+* Datacenter Dashboard
+* Equipment Status
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Database
+
+* MySQL 8
+* phpMyAdmin Support
+* Migration Ready
+* Seeder Ready
+
+---
+
+# 🖥️ Requirements
+
+## Windows
+
+ติดตั้งก่อนใช้งาน:
+
+### 1. Docker Desktop
+
+https://www.docker.com/products/docker-desktop/
+
+### 2. Git
+
+https://git-scm.com/downloads
+
+### 3. Node.js (LTS)
+
+https://nodejs.org/
+
+### 4. Composer
+
+https://getcomposer.org/
+
+### 5. VS Code
+
+https://code.visualstudio.com/
+
+---
+
+# 📦 Installation
+
+# 1. Extract Project
+
+แตกไฟล์ ZIP ไปไว้ที่:
+
+```text
+C:\laragon\www\major-cineplex-datacenter
+```
+
+---
+
+# 2. Open Project
+
+เปิด VS Code แล้วรัน:
+
+```powershell
+cd C:\laragon\www\major-cineplex-datacenter
+```
+
+---
+
+# 3. Start Docker Desktop
+
+ตรวจสอบ Docker:
+
+```powershell
+docker --version
+```
+
+และ:
+
+```powershell
+docker compose version
+```
+
+---
+
+# 4. Configure Environment
+
+ตรวจสอบ `.env`
+
+```env
+APP_NAME="Major Cineplex Datacenter"
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=mysql
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=major_cinema_web
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+
+สำคัญ:
+
+```env
+DB_HOST=db
+```
+
+ต้องตรงกับ service ใน Docker
+
+---
+
+# 5. Build Docker Containers
+
+```powershell
+docker compose up -d --build
+```
+
+---
+
+# 6. Verify Containers
+
+```powershell
+docker ps
+```
+
+ต้องเห็น:
+
+```text
+major_app
+major_db
+major_pma
+```
+
+---
+
+# 7. Install Composer Dependencies
+
+```powershell
+docker compose exec app composer install
+```
+
+---
+
+# 8. Generate Laravel APP_KEY
+
+```powershell
+docker compose exec app php artisan key:generate
+```
+
+---
+
+# 9. Database Setup
+
+## Create Database
+
+เข้า phpMyAdmin:
+
+```text
+http://localhost:8080
+```
+
+Login:
+
+```text
+Username: root
+Password: root
+```
+
+สร้าง Database:
+
+```text
+major_cinema_web
+```
+
+Collation:
+
+```text
+utf8mb4_unicode_ci
+```
+
+---
+
+# 10. Import SQL
+
+เลือก:
+
+```text
+major_cinema_web
+```
+
+จากนั้น:
+
+```text
+Import → เลือกไฟล์ SQL → Import
+```
+
+---
+
+# 11. Run Laravel Migration
+
+```powershell
+docker compose exec app php artisan migrate
+```
+
+---
+
+# 12. Install Frontend Packages
+
+```powershell
+npm install
+```
+
+---
+
+# 13. Run Frontend Dev Server
+
+```powershell
+npm run dev
+```
+
+---
+
+# 🌐 Access URLs
+
+## Laravel Application
+
+```text
+http://localhost:8000
+```
+
+## phpMyAdmin
+
+```text
+http://localhost:8080
+```
+
+---
+
+# 🗄️ Database Configuration
+
+## Default Credentials
+
+| Setting  | Value            |
+| -------- | ---------------- |
+| Host     | db               |
+| Port     | 3306             |
+| Database | major_cinema_web |
+| Username | root             |
+| Password | root             |
+
+---
+
+# 🎬 Theatre IP Convention
+
+ระบบใช้รูปแบบ IP Address ตามหมายเลขโรง
+
+| Theatre | Server      | Projector   | Sound       |
+| ------- | ----------- | ----------- | ----------- |
+| 1       | 10.131.3.10 | 10.131.3.11 | 10.131.3.14 |
+| 2       | 10.131.3.20 | 10.131.3.21 | 10.131.3.24 |
+| 3       | 10.131.3.30 | 10.131.3.31 | 10.131.3.34 |
+| 4       | 10.131.3.40 | 10.131.3.41 | 10.131.3.44 |
+
+## Convention Rules
+
+| Device           | Last Octet |
+| ---------------- | ---------- |
+| DCP Server / IMS | .10        |
+| Projector        | .11        |
+| Sound Processor  | .14        |
+
+---
+
+# 📦 Common Commands
+
+## Start Containers
+
+```powershell
+docker compose up -d
+```
+
+---
+
+## Stop Containers
+
+```powershell
+docker compose down
+```
+
+---
+
+## Rebuild Containers
+
+```powershell
+docker compose up -d --build
+```
+
+---
+
+## Remove Everything
+
+```powershell
+docker compose down -v
+```
+
+---
+
+## View Logs
+
+```powershell
+docker compose logs -f
+```
+
+---
+
+## Enter Laravel Container
+
+```powershell
+docker compose exec app bash
+```
+
+---
+
+## Enter MySQL Container
+
+```powershell
+docker compose exec db mysql -u root -p
+```
+
+Password:
+
+```text
+root
+```
+
+---
+
+# ⚡ Laravel Commands
+
+## Clear Cache
+
+```powershell
+docker compose exec app php artisan optimize:clear
+```
+
+---
+
+## Storage Link
+
+```powershell
+docker compose exec app php artisan storage:link
+```
+
+---
+
+## Route Cache
+
+```powershell
+docker compose exec app php artisan route:cache
+```
+
+---
+
+## Config Cache
+
+```powershell
+docker compose exec app php artisan config:cache
+```
+
+---
+
+# 🛠️ Troubleshooting
+
+## Docker Not Running
+
+ตรวจสอบว่า Docker Desktop เปิดอยู่
+
+```powershell
+docker ps
+```
+
+---
+
+## Database Connection Error
+
+ตรวจสอบ `.env`
+
+```env
+DB_HOST=db
+DB_PORT=3306
+DB_DATABASE=major_cinema_web
+DB_USERNAME=root
+DB_PASSWORD=root
+```
+
+---
+
+## Permission Error
+
+```powershell
+docker compose exec app chmod -R 777 storage bootstrap/cache
+```
+
+---
+
+## Port Already In Use
+
+แก้ใน `docker-compose.yml`
+
+ตัวอย่าง:
+
+```yml
+ports:
+  - "8001:80"
+```
+
+---
+
+# 📋 Development Notes
+
+* ใช้ `client_ip` สำหรับ DCP Server IP
+* หลีกเลี่ยง hardcode ข้อมูลที่ไม่ใช่ของจริง
+* ใช้ NULL สำหรับข้อมูลที่ยังไม่มี
+* ระบบรองรับ Docker และ Local Development
+* Database รองรับ Migration และ Seeder
+
+---
+
+# 🔐 Production Notes
+
+ก่อน Deploy จริง:
+
+* เปลี่ยน `APP_ENV=production`
+* ปิด `APP_DEBUG`
+* เปลี่ยน MySQL Password
+* ใช้ HTTPS
+* Backup Database สม่ำเสมอ
+
+---
+
+# 📜 License
+
+Internal Use Only
+Major Cineplex Datacenter System
+
+---
+
+# 👨‍💻 Developer
+
+Developed for Datacenter & Cinema Equipment Management
+
+---

@@ -453,12 +453,8 @@
 
     {{-- Admin Header --}}
     <div class="admin-header">
-        <h1 class="admin-title">
-            Manage System Users
-        </h1>
-        <div class="admin-subtitle">
-            Add / Remove / Change user permissions
-        </div>
+        <h1 class="admin-title">Manage System Users</h1>
+        <div class="admin-subtitle">Add / Remove / Change user permissions</div>
     </div>
 
     {{-- Alert Messages --}}
@@ -467,7 +463,7 @@
             {{ session('status') }}
         </div>
     @endif
-    
+
     @if(session('error'))
         <div class="alert-danger">
             {{ session('error') }}
@@ -484,9 +480,7 @@
                 class="search-input"
                 placeholder="Search by name or email ..."
             >
-            <button type="submit" class="btn-search">
-                Search
-            </button>
+            <button type="submit" class="btn-search">Search</button>
         </form>
     </div>
 
@@ -520,53 +514,46 @@
                                 @endif
                             </td>
 
-                            {{-- Role Update Form --}}
+                            {{-- Role Update --}}
                             <td>
-                                <form action="{{ route('admin.users.updateRole', $user->id) }}"
-                                      method="POST"
-                                      class="role-form">
+                                @if($user->email === 'admin@gmail.com')
+                                    <span class="badge-admin">Locked</span>
+                                @else
+                                    <form action="{{ route('admin.users.updateRole', $user->id) }}" method="POST" class="role-form">
+                                        @csrf
+                                        @method('PATCH')
 
-                                    @csrf
-                                    @method('PATCH')
+                                        <select name="role" class="role-select">
+                                            <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
+                                            <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
+                                        </select>
 
-                                    <select name="role" class="role-select">
-                                        <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>User</option>
-                                        <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
-                                    </select>
-
-                                    <button type="submit" class="btn-save">
-                                        Save
-                                    </button>
-                                </form>
+                                        <button type="submit" class="btn-save">Save</button>
+                                    </form>
+                                @endif
                             </td>
 
-                            {{-- Delete User Button --}}
+                            {{-- Delete User --}}
                             <td>
                                 @if(auth()->id() === $user->id)
-                                    {{-- Prevent deleting yourself --}}
-                                    <button class="btn-disabled" disabled>
-                                        Cannot delete
-                                    </button>
+                                    <button class="btn-disabled" disabled>Cannot delete</button>
+                                @elseif($user->email === 'admin@gmail.com')
+                                    <button class="btn-disabled" disabled>Locked</button>
                                 @else
                                     <form action="{{ route('admin.users.destroy', $user->id) }}"
                                           method="POST"
                                           onsubmit="return confirm('Are you sure you want to delete this user?');">
-
                                         @csrf
                                         @method('DELETE')
 
-                                        <button type="submit" class="btn-delete">
-                                            Delete
-                                        </button>
+                                        <button type="submit" class="btn-delete">Delete</button>
                                     </form>
                                 @endif
                             </td>
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="empty-state">
-                                No users found in the system
-                            </td>
+                            <td colspan="6" class="empty-state">No users found in the system</td>
                         </tr>
                     @endforelse
                 </tbody>

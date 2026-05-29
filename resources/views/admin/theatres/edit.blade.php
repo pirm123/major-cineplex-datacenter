@@ -28,7 +28,7 @@
 
         @include('admin.theatres.partials.form', ['theatre' => $theatre])
 
-        {{-- Bottom buttons --}}
+        <!-- {{-- Bottom buttons --}}
         <div class="d-flex gap-2 mt-4">
             <button type="submit" class="btn btn-success">
                 Save Changes
@@ -38,7 +38,7 @@
                class="btn btn-secondary">
                 Cancel
             </a>
-        </div>
+        </div> -->
 
     </form>
 </div>

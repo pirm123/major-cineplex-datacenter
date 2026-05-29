@@ -7,23 +7,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\CinemaBranchController;
 use App\Http\Controllers\Admin\TheatreAdminController;
 use App\Http\Controllers\Admin\UserAdminController;
+use App\Http\Controllers\ExcelController;
 
-// /*
-// |--------------------------------------------------------------------------
-// | Language Switch
-// |--------------------------------------------------------------------------
-// */
-// Route::get('/lang/{locale}', function (string $locale) {
-//     abort_unless(in_array($locale, ['th', 'en']), 404);
-//     session(['locale' => $locale]);
-//     return back();
-// })->name('locale.switch');
 
-/*
-|--------------------------------------------------------------------------
-| Public Routes
-|--------------------------------------------------------------------------
-*/
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/branches/{branch}/theatres', [TheatreController::class, 'index'])
@@ -77,5 +63,15 @@ Route::middleware(['auth', 'role:admin'])
     });
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
+
+    Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/excel', [ExcelController::class, 'index'])->name('admin.excel');
+    Route::get('/admin/excel/export', [ExcelController::class, 'export'])->name('admin.excel.export');
+    Route::post('/admin/excel/import', [ExcelController::class, 'import'])->name('admin.excel.import');
+    });
+
+    Route::post('/branches/{branch}/favorite', [HomeController::class, 'toggleFavorite'])
+    ->name('branches.favorite')
+    ->middleware('auth');
     
 require __DIR__.'/auth.php';
